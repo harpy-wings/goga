@@ -8,12 +8,15 @@ type ga struct {
 	genarator func() Model
 
 	// fitness is weght of each model to be selected for the Mutation for the next generation.
-	fitness func(rank int64, cost float64) float64
+	fitness FitnessFunc
 
 	// population calculate the next generation popoulation based on the step, and best cost value.
-	population func(step int64, bestCost float64) int64
+	population PopulationFunc
 
 	config struct {
+
+		// initialPopulation is the population of the first generation.
+		initialPopulation int64
 
 		//maxNumOfSteps maximum number of steps
 		// -1 for infinity run
