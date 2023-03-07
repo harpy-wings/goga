@@ -15,7 +15,7 @@ var (
 	// defaultFitness default fitness function, equal chance.
 	defaultFitness = func(int64, float64) float64 { return 1 }
 
-	defaultInitialPopulation = int64(1000)
+	defaultInitialPopulation = uint64(1000)
 	defaultPopulation        = func(currentPopulation int64, step int64, bestCost, worstCost float64) int64 { return currentPopulation }
 	defaultReverse           = false
 )

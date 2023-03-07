@@ -1,5 +1,7 @@
 package goga
 
+import "time"
+
 type Option func(*ga) error
 
 // OptionWithDefaultGenerator use the reflect to generate random values for the properties of provided type.
@@ -69,6 +71,51 @@ func OptionWithSelection(top, mutaion, random float64) Option {
 		g.config.selection.top = top
 		g.config.selection.mutation = mutaion
 		g.config.selection.random = random
+		return nil
+	}
+}
+
+// OptionWithReverse
+// todo add comment
+func OptionWithReverse(v bool) Option {
+	return func(g *ga) error {
+		g.config.reverse = v
+		return nil
+	}
+}
+
+// OptionWithStepInterval
+// todo add comment
+func OptionWithStepInterval(d time.Duration) Option {
+	return func(g *ga) error {
+		g.config.stepsInterval = d
+		return nil
+	}
+}
+
+// OptionWithMaximumNumberOfSteps
+// todo add comment
+func OptionWithMaximumNumberOfSteps(n int64) Option {
+	return func(g *ga) error {
+		g.config.maxNumOfSteps = n
+		return nil
+	}
+}
+
+// OptionWithTargetCost
+// todo add comment
+func OptionWithTargetCost(v float64) Option {
+	return func(g *ga) error {
+		g.config.targetCost = v
+		return nil
+	}
+}
+
+// OptionWithInitialPopulation
+// todo add comment
+func OptionWithInitialPopulation(n uint64) Option {
+	return func(g *ga) error {
+		g.config.initialPopulation = n
 		return nil
 	}
 }
