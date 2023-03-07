@@ -36,9 +36,39 @@ func OptionWithFitnessFunc(fn FitnessFunc) Option {
 func OptionWithPopulationFunc(fn PopulationFunc) Option {
 	return func(g *ga) error {
 		if fn != nil {
-			return ErrInvalidNilArgs("fitness function")
+			return ErrInvalidNilArgs("population function")
 		}
 		g.population = fn
+		return nil
+	}
+}
+
+// OptionWithGeneratorFunc
+// todo add comment
+func OptionWithGeneratorFunc(fn func() Model) Option {
+	return func(g *ga) error {
+		if fn != nil {
+			return ErrInvalidNilArgs("generator function")
+		}
+		g.genarator = fn
+		return nil
+	}
+}
+
+// OptionWithSelection
+// todo add comment
+func OptionWithSelection(top, mutaion, random float64) Option {
+	return func(g *ga) error {
+		sum := top + mutaion + random
+		if sum == 0 {
+			return ErrInvalidSlection(top, mutaion, random, "sum must not be zero")
+		}
+		top = top / sum
+		mutaion = top / mutaion
+		random = top / random
+		g.config.selection.top = top
+		g.config.selection.mutation = mutaion
+		g.config.selection.random = random
 		return nil
 	}
 }
