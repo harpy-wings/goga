@@ -14,7 +14,7 @@ type Option func(*ga) error
  OptionWithDefaultGenerator(model{})
 */
 // TODO add body
-func OptionWithDefaultGenerator(t any) Option {
+func OptionWithDefaultGenerator(t interface{}) Option {
 	return func(g *ga) error {
 
 		return nil
