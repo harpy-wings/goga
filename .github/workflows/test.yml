@@ -1,4 +1,4 @@
-name: Generate code coverage badge
+name: Code Coverage
 
 on:
   push:
@@ -58,5 +58,7 @@ jobs:
         with:
           github_token: ${{ github.token }}
           branch: ${{ github.ref_name }}
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+  codecov:
+    name: Codecov push
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
