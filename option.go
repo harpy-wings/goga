@@ -14,15 +14,18 @@ type Option func(*ga) error
  OptionWithDefaultGenerator(model{})
 */
 // TODO add body
-func OptionWithDefaultGenerator(t interface{}) Option {
+func OptionWithDefaultGenerator(t any) Option {
 	return func(g *ga) error {
 
 		return nil
 	}
 }
 
-// OptionWithFitnessFunc
-// todo add comment
+// OptionWithFitnessFunc takes a function to calculate chance of the solution to be selected during crossover.
+// Cost and score will be defined separately (Generic solution) based on how the individual is calculated and gets score
+/*
+ */
+// TODO add body
 func OptionWithFitnessFunc(fn FitnessFunc) Option {
 	return func(g *ga) error {
 		if fn == nil {
@@ -33,11 +36,10 @@ func OptionWithFitnessFunc(fn FitnessFunc) Option {
 	}
 }
 
-// OptionWithPopulationFunc
-// todo add comment
+// OptionWithPopulationFunc define operations such as cross over, mutation and replacement during each iteration of GA.
 func OptionWithPopulationFunc(fn PopulationFunc) Option {
 	return func(g *ga) error {
-		if fn == nil {
+		if fn != nil {
 			return ErrInvalidNilArgs("population function")
 		}
 		g.population = fn
@@ -45,11 +47,10 @@ func OptionWithPopulationFunc(fn PopulationFunc) Option {
 	}
 }
 
-// OptionWithGeneratorFunc
-// todo add comment
+// OptionWithGeneratorFunc generator to make solutions randomly
 func OptionWithGeneratorFunc(fn func() Model) Option {
 	return func(g *ga) error {
-		if fn == nil {
+		if fn != nil {
 			return ErrInvalidNilArgs("generator function")
 		}
 		g.genarator = fn
@@ -57,8 +58,7 @@ func OptionWithGeneratorFunc(fn func() Model) Option {
 	}
 }
 
-// OptionWithSelection
-// todo add comment
+// OptionWithSelection make subset of the population is selected for the next generation based on their fitness scores.
 func OptionWithSelection(top, mutaion, random float64) Option {
 	return func(g *ga) error {
 		sum := top + mutaion + random
@@ -71,6 +71,14 @@ func OptionWithSelection(top, mutaion, random float64) Option {
 		g.config.selection.top = top
 		g.config.selection.mutation = mutaion
 		g.config.selection.random = random
+		return nil
+	}
+}
+
+// OptionWithReverse
+// todo add comment
+func OptionWithReverse(v bool) Option {
+	return func(g *ga) error {
 		return nil
 	}
 }
@@ -94,6 +102,7 @@ func OptionWithMaximumNumberOfSteps(n int64) Option {
 }
 
 // OptionWithTargetCost
+// specify the target cost to when comuptation continues
 // todo add comment
 func OptionWithTargetCost(v float64) Option {
 	return func(g *ga) error {
@@ -103,7 +112,9 @@ func OptionWithTargetCost(v float64) Option {
 }
 
 // OptionWithInitialPopulation
-// todo add comment
+/*
+ */
+//n number of the first population intitialization of randomly solutions
 func OptionWithInitialPopulation(n uint64) Option {
 	return func(g *ga) error {
 		g.config.initialPopulation = n
