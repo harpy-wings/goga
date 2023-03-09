@@ -16,7 +16,6 @@ type Option func(*ga) error
 // TODO add body
 func OptionWithDefaultGenerator(t any) Option {
 	return func(g *ga) error {
-
 		return nil
 	}
 }
@@ -59,13 +58,13 @@ func OptionWithGeneratorFunc(fn func() Model) Option {
 		if fn != nil {
 			return ErrInvalidNilArgs("generator function")
 		}
-		g.genarator = fn
+		g.generator = fn
 		return nil
 	}
 }
 
 // OptionWithSelection make subset of the population is selected for the next generation based on their fitness scores.
-// ex: the folowing options works the same.
+// ex: the following options works the same.
 //  OptionWithSelection(0.2,0.6,0.2) 	// 20% top, 60% crossover, 20% random
 //  OptionWithSelection(20,60,20) 		// 20% top, 60% crossover, 20% random
 //  OptionWithSelection(1,3,1) 			// 20% top, 60% crossover, 20% random
@@ -73,7 +72,7 @@ func OptionWithSelection(top, mutaion, random float64) Option {
 	return func(g *ga) error {
 		sum := top + mutaion + random
 		if sum == 0 {
-			return ErrInvalidSlection(top, mutaion, random, "sum must not be zero")
+			return ErrInvalidSelection(top, mutaion, random, "sum must not be zero")
 		}
 		top = top / sum
 		mutaion = top / mutaion
@@ -128,7 +127,7 @@ func OptionWithTargetCost(v float64) Option {
 
 // OptionWithInitialPopulation is a function that returns an Option that sets the initial population of the genetic algorithm.
 //
-// defaul: 1000
+// default: 1000
 //
 // ex:
 //  OptionWithInitialPopulation(10000)

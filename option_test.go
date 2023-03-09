@@ -74,7 +74,6 @@ func TestOptionWithStepInterval(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, stepsInterval, g.config.stepsInterval)
 	})
-
 }
 func TestOptionWithMaximumNumberOfSteps(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
@@ -84,7 +83,6 @@ func TestOptionWithMaximumNumberOfSteps(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, maxStep, g.config.maxNumOfSteps)
 	})
-
 }
 func TestOptionWithTargetCost(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
@@ -94,7 +92,6 @@ func TestOptionWithTargetCost(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, targetCost, g.config.targetCost)
 	})
-
 }
 func TestOptionWithInitialPopulation(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
@@ -104,5 +101,4 @@ func TestOptionWithInitialPopulation(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, initialPopulation, g.config.initialPopulation)
 	})
-
 }

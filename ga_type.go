@@ -4,13 +4,13 @@ import "time"
 
 type ga struct {
 
-	// genarator generate random Models
-	genarator func() Model
+	// generator generate random Models
+	generator func() Model
 
-	// fitness is weght of each model to be selected for the Mutation for the next generation.
+	// fitness is weight of each model to be selected for the Mutation for the next generation.
 	fitness FitnessFunc
 
-	// population calculate the next generation popoulation based on the step, and best cost value.
+	// population calculate the next generation population based on the step, and best cost value.
 	population PopulationFunc
 
 	config struct {
@@ -27,8 +27,8 @@ type ga struct {
 		// ga stops when  error < targetCost
 		targetCost float64
 
-		// the inverval between two step
-		// usefull for infinity mood.
+		// the interval between two step
+		// useful for infinity mood.
 		stepsInterval time.Duration
 
 		// selection is the property for distribution to the next generation.
