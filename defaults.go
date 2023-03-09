@@ -4,7 +4,7 @@ import "time"
 
 var (
 	defaultSelectionTop      = 0.2
-	defaultSelectionMutation = 0.4
+	defaultSelectionMutation = 0.6
 
 	defaultMaxNumOfSteps = int64(1000)
 

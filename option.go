@@ -64,6 +64,9 @@ func OptionWithGeneratorFunc(fn func() Model) Option {
 }
 
 // OptionWithSelection make subset of the population is selected for the next generation based on their fitness scores.
+//
+// default: 0.2,0.6,0.2
+//
 // ex: the following options works the same.
 //
 //	OptionWithSelection(0.2,0.6,0.2) 	// 20% top, 60% crossover, 20% random
