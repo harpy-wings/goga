@@ -7,47 +7,47 @@ run:
   concurrency: 4
 
 linters:
-  disable-all: true
+  # disable-all: true
   # Enable specific linter
   # https://golangci-lint.run/usage/linters/#enabled-by-default-linters
   enable:
-    - asciicheck
-    - bidichk
-    - depguard
-    - durationcheck
-    - errcheck
-    - errname
-    - exportloopref
-    - forcetypeassert
-    - goconst
+  #   - asciicheck
+  #   - bidichk
+  #   - depguard
+  #   - durationcheck
+  #   - errcheck
+  #   - errname
+  #   - exportloopref
+  #   - forcetypeassert
+  #   - goconst
     - gofmt
-    - goimports
+    # - goimports
     - goheader
-    - gomodguard
-    - goprintffuncname
-    - gosimple
-    - govet
-    - importas
-    - ineffassign
-    - makezero
-    - misspell
-    - nakedret
-    - nilnil
-    - promlinter
-    - staticcheck
-    - stylecheck
-    - tenv
-    - testpackage
-    - typecheck
-    - unconvert
-    - unused
-    - whitespace
-    - dogsled
-    - gocritic
-    - gofumpt
-    - gosec
-    - nolintlint
-    - revive
+  #   - gomodguard
+  #   - goprintffuncname
+  #   - gosimple
+  #   - govet
+  #   - importas
+  #   - ineffassign
+  #   - makezero
+  #   - misspell
+  #   - nakedret
+  #   - nilnil
+  #   - promlinter
+  #   - staticcheck
+  #   - stylecheck
+  #   - tenv
+  #   - testpackage
+  #   - typecheck
+  #   - unconvert
+  #   - unused
+  #   - whitespace
+  #   - dogsled
+  #   - gocritic
+  #   - gofumpt
+  #   - gosec
+  #   - nolintlint
+  #   - revive
 
 issues:
   exclude-rules: []

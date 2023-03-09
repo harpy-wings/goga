@@ -65,9 +65,10 @@ func OptionWithGeneratorFunc(fn func() Model) Option {
 
 // OptionWithSelection make subset of the population is selected for the next generation based on their fitness scores.
 // ex: the following options works the same.
-//  OptionWithSelection(0.2,0.6,0.2) 	// 20% top, 60% crossover, 20% random
-//  OptionWithSelection(20,60,20) 		// 20% top, 60% crossover, 20% random
-//  OptionWithSelection(1,3,1) 			// 20% top, 60% crossover, 20% random
+//
+//	OptionWithSelection(0.2,0.6,0.2) 	// 20% top, 60% crossover, 20% random
+//	OptionWithSelection(20,60,20) 		// 20% top, 60% crossover, 20% random
+//	OptionWithSelection(1,3,1) 		// 20% top, 60% crossover, 20% random
 func OptionWithSelection(top, mutaion, random float64) Option {
 	return func(g *ga) error {
 		sum := top + mutaion + random
@@ -90,7 +91,8 @@ func OptionWithSelection(top, mutaion, random float64) Option {
 // default: 0 (no wait)
 //
 // ex:
-//  OptionWithStepInterval(30 * time.Second)
+//
+//	OptionWithStepInterval(30 * time.Second)
 func OptionWithStepInterval(d time.Duration) Option {
 	return func(g *ga) error {
 		g.config.stepsInterval = d
@@ -103,7 +105,8 @@ func OptionWithStepInterval(d time.Duration) Option {
 // default: 1000
 //
 // ex:
-//  OptionWithMaximumNumberOfSteps(1000)
+//
+//	OptionWithMaximumNumberOfSteps(1000)
 func OptionWithMaximumNumberOfSteps(n int64) Option {
 	return func(g *ga) error {
 		g.config.maxNumOfSteps = n
@@ -117,7 +120,8 @@ func OptionWithMaximumNumberOfSteps(n int64) Option {
 // default: 0.05
 //
 // ex:
-//  OptionWithTargetCost(0.2)
+//
+//	OptionWithTargetCost(0.2)
 func OptionWithTargetCost(v float64) Option {
 	return func(g *ga) error {
 		g.config.targetCost = v
@@ -130,7 +134,8 @@ func OptionWithTargetCost(v float64) Option {
 // default: 1000
 //
 // ex:
-//  OptionWithInitialPopulation(10000)
+//
+//	OptionWithInitialPopulation(10000)
 func OptionWithInitialPopulation(n uint64) Option {
 	return func(g *ga) error {
 		g.config.initialPopulation = n
