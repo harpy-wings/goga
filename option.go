@@ -37,7 +37,7 @@ func OptionWithFitnessFunc(fn FitnessFunc) Option {
 // todo add comment
 func OptionWithPopulationFunc(fn PopulationFunc) Option {
 	return func(g *ga) error {
-		if fn != nil {
+		if fn == nil {
 			return ErrInvalidNilArgs("population function")
 		}
 		g.population = fn
@@ -49,7 +49,7 @@ func OptionWithPopulationFunc(fn PopulationFunc) Option {
 // todo add comment
 func OptionWithGeneratorFunc(fn func() Model) Option {
 	return func(g *ga) error {
-		if fn != nil {
+		if fn == nil {
 			return ErrInvalidNilArgs("generator function")
 		}
 		g.genarator = fn
@@ -71,15 +71,6 @@ func OptionWithSelection(top, mutaion, random float64) Option {
 		g.config.selection.top = top
 		g.config.selection.mutation = mutaion
 		g.config.selection.random = random
-		return nil
-	}
-}
-
-// OptionWithReverse
-// todo add comment
-func OptionWithReverse(v bool) Option {
-	return func(g *ga) error {
-		g.config.reverse = v
 		return nil
 	}
 }

@@ -30,7 +30,6 @@ func (s *ga) loadDefaults() {
 	s.config.selection.top = defaultSelectionTop
 	s.config.selection.mutation = defaultSelectionMutation
 	s.config.selection.random = float64(1) - defaultSelectionTop - defaultSelectionMutation
-	s.config.reverse = defaultReverse
 }
 
 func (s *ga) init() error {

@@ -31,9 +31,6 @@ type ga struct {
 		// usefull for infinity mood.
 		stepsInterval time.Duration
 
-		// reverse reverse the process to maximize the cost.
-		reverse bool
-
 		// selection is the property for distribution to the next generation.
 		//
 		// top + mutation + random = 1
