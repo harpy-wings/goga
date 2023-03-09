@@ -1,7 +1,7 @@
-<!-- < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ☺ 
-v                            ✰  Thanks for opening an issue! ✰    
+<!-- < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ☺
+v                            ✰  Thanks for opening an issue! ✰
 v    Before smashing the submit button please review the template.
-v    Please also ensure that this is not a duplicate issue :)  
+v    Please also ensure that this is not a duplicate issue :)
 ☺ > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >  -->
 
 ---
@@ -37,4 +37,3 @@ A clear and concise description of what the bug is.
 - Arch: [e.g. amd64]
 - ENV:
 <!-- other environment variables which can be related -->
-
