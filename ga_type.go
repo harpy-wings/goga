@@ -1,14 +1,18 @@
 package goga
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 type ga struct {
+	sync.Mutex
 
 	// generator generate random Models
 	generator func() Model
 
-	// fitness is weight of each model to be selected for the Mutation for the next generation.
-	fitness FitnessFunc
+	// weightFunc is weight of each model to be selected for the Mutation for the next generation.
+	weightFunc WeightFunc
 
 	// population calculate the next generation population based on the step, and best cost value.
 	population PopulationFunc
@@ -39,5 +43,15 @@ type ga struct {
 			mutation float64
 			random   float64
 		}
+
+		// numberOfThreads the number of thread in Cost calculation step.
+		numberOfThreads int
 	}
+
+	curetGeneration modelSortedList
+	step            int64
+
+	result        chan Model
+	runtimeError  chan error
+	runtimeResult chan RunTimeResult
 }

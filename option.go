@@ -25,12 +25,12 @@ func OptionWithDefaultGenerator(t any) Option {
 /*
 	TODO add example
 */
-func OptionWithFitnessFunc(fn FitnessFunc) Option {
+func OptionWithFitnessFunc(fn WeightFunc) Option {
 	return func(g *ga) error {
 		if fn == nil {
 			return ErrInvalidNilArgs("fitness function")
 		}
-		g.fitness = fn
+		g.weightFunc = fn
 		return nil
 	}
 }
@@ -55,7 +55,7 @@ func OptionWithPopulationFunc(fn PopulationFunc) Option {
 */
 func OptionWithGeneratorFunc(fn func() Model) Option {
 	return func(g *ga) error {
-		if fn != nil {
+		if fn == nil {
 			return ErrInvalidNilArgs("generator function")
 		}
 		g.generator = fn

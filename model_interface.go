@@ -8,14 +8,4 @@ type Model interface {
 	//
 	// Note: A.Mutate(B) != B.Mutate(A)
 	Mutation(Model) Model
-
-	// Encode must encode the Model to array of bytes
-	//
-	// * required if you want to restore the GA from disk.
-	Encode() ([]byte, error)
-
-	// Decode must restore the model from array of bytes
-	//
-	// * required if you want to restore the model from Disk.
-	Decode([]byte) error
 }
