@@ -41,7 +41,7 @@ func OptionWithFitnessFunc(fn WeightFunc) Option {
 */
 func OptionWithPopulationFunc(fn PopulationFunc) Option {
 	return func(g *ga) error {
-		if fn != nil {
+		if fn == nil {
 			return ErrInvalidNilArgs("population function")
 		}
 		g.population = fn
