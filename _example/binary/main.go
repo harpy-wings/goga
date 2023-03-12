@@ -68,7 +68,7 @@ func main() {
 	}
 	t := time.Now()
 	GA.Start()
-	C := GA.GetRunChan()
+	C := GA.RuntimeBestResult()
 	go func() {
 		m := ""
 		for v := range C {

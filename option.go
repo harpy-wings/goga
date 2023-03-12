@@ -14,11 +14,11 @@ type Option func(*ga) error
  OptionWithDefaultGenerator(model{})
 */
 // TODO add body
-func OptionWithDefaultGenerator(t any) Option {
-	return func(g *ga) error {
-		return nil
-	}
-}
+// func OptionWithDefaultGenerator(t any) Option {
+// 	return func(g *ga) error {
+// 		return nil
+// 	}
+// }
 
 // OptionWithFitnessFunc takes a function to calculate chance of the solution to be selected during crossover.
 // Cost and score will be defined separately (Generic solution) based on how the individual is calculated and gets score
@@ -72,17 +72,17 @@ func OptionWithGeneratorFunc(fn func() Model) Option {
 //	OptionWithSelection(0.2,0.6,0.2) 	// 20% top, 60% crossover, 20% random
 //	OptionWithSelection(20,60,20) 		// 20% top, 60% crossover, 20% random
 //	OptionWithSelection(1,3,1) 		// 20% top, 60% crossover, 20% random
-func OptionWithSelection(top, mutaion, random float64) Option {
+func OptionWithSelection(top, mutation, random float64) Option {
 	return func(g *ga) error {
-		sum := top + mutaion + random
+		sum := top + mutation + random
 		if sum == 0 {
-			return ErrInvalidSelection(top, mutaion, random, "sum must not be zero")
+			return ErrInvalidSelection(top, mutation, random, "sum must not be zero")
 		}
 		top = top / sum
-		mutaion = top / mutaion
-		random = top / random
+		mutation = mutation / sum
+		random = random / sum
 		g.config.selection.top = top
-		g.config.selection.mutation = mutaion
+		g.config.selection.mutation = mutation
 		g.config.selection.random = random
 		return nil
 	}
