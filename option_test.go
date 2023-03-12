@@ -10,13 +10,13 @@ import (
 func TestOptionWithFitnessFunc(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		g := &ga{}
-		err := OptionWithFitnessFunc(func(rank int64, cost float64) float64 { return 1 })(g)
+		err := OptionWithWeightFunc(func(rank int, cost float64) int { return 1 })(g)
 		require.NoError(t, err)
 	})
 	t.Run("failure", func(t *testing.T) {
 		// nil func
 		g := &ga{}
-		err := OptionWithFitnessFunc(nil)(g)
+		err := OptionWithWeightFunc(nil)(g)
 		require.Error(t, err)
 	})
 }
@@ -24,7 +24,7 @@ func TestOptionWithFitnessFunc(t *testing.T) {
 func TestOptionWithPopulationFunc(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		g := &ga{}
-		err := OptionWithPopulationFunc(func(currentPopulation int64, step int64, bestCost, worstCost float64) int64 { return 1 })(g)
+		err := OptionWithPopulationFunc(func(currentPopulation int, step int64, bestCost, worstCost float64) int { return 1 })(g)
 		require.NoError(t, err)
 	})
 
@@ -95,7 +95,7 @@ func TestOptionWithTargetCost(t *testing.T) {
 }
 func TestOptionWithInitialPopulation(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
-		initialPopulation := uint64(2000)
+		initialPopulation := int(2000)
 		g := &ga{}
 		err := OptionWithInitialPopulation(initialPopulation)(g)
 		require.NoError(t, err)

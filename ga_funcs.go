@@ -30,7 +30,7 @@ func New(ops ...Option) (GA, error) {
 func (s *ga) loadDefaults() {
 	s.config.initialPopulation = defaultInitialPopulation
 	s.population = defaultPopulation
-	s.weightFunc = defaultFitness
+	s.weightFunc = defaultWeightFunc
 	s.config.maxNumOfSteps = defaultMaxNumOfSteps
 	s.config.targetCost = defaultTargetCost
 	s.config.stepsInterval = defaultStepsInterval
@@ -68,9 +68,8 @@ func (s *ga) Start() error {
 		s.sort()
 		s.step = 0
 		for {
-			//todo add calculate the nextPopulationValue based on the Population function
-			// nextPopulation := s.population(s.curetGenerationLength, s.step, s.curetGeneration[0].cost, s.curetGeneration[len(s.curetGeneration)-1].cost)
-			nextPopulation := s.config.initialPopulation
+			genLen := len(s.curetGeneration)
+			nextPopulation := s.population(genLen, s.step, s.curetGeneration[0].cost, s.curetGeneration[genLen-1].cost)
 			top := s.getTop(int(nextPopulation))
 			mut := s.getMutation(int(nextPopulation))
 			s.curetGeneration = append(top, mut...)
@@ -114,8 +113,8 @@ func (s *ga) Result() (Model, error) {
 	}
 }
 
-func (s *ga) generateRemindingGeneration(nextPopulation uint64) error {
-	for i := uint64(len(s.curetGeneration)); i < nextPopulation; i++ {
+func (s *ga) generateRemindingGeneration(nextPopulation int) error {
+	for i := len(s.curetGeneration); i < nextPopulation; i++ {
 		s.curetGeneration = append(s.curetGeneration, modelRecord{s.generator(), 0})
 	}
 	return nil
@@ -163,14 +162,22 @@ func (s *ga) getTop(population int) []modelRecord {
 }
 func (s *ga) getMutation(population int) []modelRecord {
 	//todo add check that the generation size is not grow too fast.
-	//todo add weighed selection
+	var selectingItems []int
 	List := s.curetGeneration[:int((s.config.selection.mutation+s.config.selection.top)*float64(population))]
-	n := len(List) - 1
+	//fill up the weighted indexes
+	for i, v := range List {
+		w := s.weightFunc(i, v.cost)
+		for j := 0; j < w; j++ {
+			selectingItems = append(selectingItems, i)
+		}
+	}
+
+	n := len(selectingItems) - 1
 	targetLen := int(s.config.selection.mutation * float64(population))
 	var res []modelRecord
 	for i := 0; i < targetLen/2; i++ {
-		A := List[rand.Intn(n)].model
-		B := List[rand.Intn(n)].model
+		A := List[selectingItems[rand.Intn(n)]].model
+		B := List[selectingItems[rand.Intn(n)]].model
 		res = append(res, modelRecord{A.Mutation(B), 0}, modelRecord{B.Mutation(A), 0})
 	}
 	return res

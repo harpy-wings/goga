@@ -1,6 +1,6 @@
 package goga
 
 type (
-	WeightFunc     func(rank int64, cost float64) float64
-	PopulationFunc func(currentPopulation int64, step int64, bestCost, worstCost float64) int64
+	WeightFunc     func(rank int, cost float64) int
+	PopulationFunc func(currentPopulation int, step int64, bestCost, worstCost float64) int
 )

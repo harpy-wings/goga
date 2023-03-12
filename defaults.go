@@ -13,9 +13,10 @@ var (
 
 	defaultStepsInterval = time.Duration(0)
 
-	// defaultFitness default fitness function, equal chance.
-	defaultFitness = func(int64, float64) float64 { return 1 }
+	// defaultWeightFunc default fitness function, equal chance.
+	defaultWeightFunc = func(int, float64) int { return 1 }
 
-	defaultInitialPopulation = uint64(1000)
-	defaultPopulation        = func(currentPopulation int64, step int64, bestCost, worstCost float64) int64 { return currentPopulation }
+	defaultInitialPopulation = int(1000)
+
+	defaultPopulation = func(currentPopulation int, step int64, bestCost, worstCost float64) int { return currentPopulation }
 )

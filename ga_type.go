@@ -20,7 +20,7 @@ type ga struct {
 	config struct {
 
 		// initialPopulation is the population of the first generation.
-		initialPopulation uint64
+		initialPopulation int
 
 		//maxNumOfSteps maximum number of steps
 		// -1 for infinity run

@@ -40,14 +40,6 @@ func (s model) Mutation(m goga.Model) goga.Model {
 	return res
 }
 
-func (s model) Encode() ([]byte, error) {
-	return s, nil
-}
-func (s model) Decode(v []byte) error {
-	s = v
-	return nil
-}
-
 func Generator() goga.Model {
 	m := make(model, len(target))
 	rand.Read(m)
@@ -58,10 +50,10 @@ func main() {
 	GA, err := goga.New(
 		goga.OptionWithGeneratorFunc(Generator),
 		goga.OptionWithTargetCost(0),
-		goga.OptionWithSelection(2, 3, 2),
+		goga.OptionWithSelection(1, 2, 5),
 		goga.OptionWithInitialPopulation(600),
 		// goga.OptionWithStepInterval(10*time.Millisecond),
-		goga.OptionWithMaximumNumberOfSteps(1000000000),
+		goga.OptionWithMaximumNumberOfSteps(1000),
 	)
 	if err != nil {
 		panic(err)

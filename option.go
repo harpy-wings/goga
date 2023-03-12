@@ -20,12 +20,12 @@ type Option func(*ga) error
 // 	}
 // }
 
-// OptionWithFitnessFunc takes a function to calculate chance of the solution to be selected during crossover.
+// OptionWithWeightFunc takes a function to calculate chance of the solution to be selected during crossover.
 // Cost and score will be defined separately (Generic solution) based on how the individual is calculated and gets score
 /*
 	TODO add example
 */
-func OptionWithFitnessFunc(fn WeightFunc) Option {
+func OptionWithWeightFunc(fn WeightFunc) Option {
 	return func(g *ga) error {
 		if fn == nil {
 			return ErrInvalidNilArgs("fitness function")
@@ -139,7 +139,7 @@ func OptionWithTargetCost(v float64) Option {
 // ex:
 //
 //	OptionWithInitialPopulation(10000)
-func OptionWithInitialPopulation(n uint64) Option {
+func OptionWithInitialPopulation(n int) Option {
 	return func(g *ga) error {
 		g.config.initialPopulation = n
 		return nil
