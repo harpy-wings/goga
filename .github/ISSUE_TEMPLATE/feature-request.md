@@ -1,7 +1,7 @@
-<!-- < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ☺ 
-v                            ✰  Thanks for opening an issue! ✰    
+<!-- < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ☺
+v                            ✰  Thanks for opening an issue! ✰
 v    Before smashing the submit button please review the template.
-v    Please also ensure that this is not a duplicate issue :)  
+v    Please also ensure that this is not a duplicate issue :)
 ☺ > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >  -->
 
 ---
@@ -19,7 +19,7 @@ assignees: harpy-wings
 
 ## Problem Definition \*
 
-<!-- Why do we need this feature? 
+<!-- Why do we need this feature?
 What problems may be addressed by introducing this feature?
 What benefits does the SDK stand to gain by including this feature?
 Are there any disadvantages of including this feature? -->

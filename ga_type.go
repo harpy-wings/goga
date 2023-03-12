@@ -1,22 +1,26 @@
 package goga
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 type ga struct {
+	sync.Mutex
 
-	// genarator generate random Models
-	genarator func() Model
+	// generator generate random Models
+	generator func() Model
 
-	// fitness is weght of each model to be selected for the Mutation for the next generation.
-	fitness FitnessFunc
+	// weightFunc is weight of each model to be selected for the Mutation for the next generation.
+	weightFunc WeightFunc
 
-	// population calculate the next generation popoulation based on the step, and best cost value.
+	// population calculate the next generation population based on the step, and best cost value.
 	population PopulationFunc
 
 	config struct {
 
 		// initialPopulation is the population of the first generation.
-		initialPopulation uint64
+		initialPopulation int
 
 		//maxNumOfSteps maximum number of steps
 		// -1 for infinity run
@@ -27,12 +31,9 @@ type ga struct {
 		// ga stops when  error < targetCost
 		targetCost float64
 
-		// the inverval between two step
-		// usefull for infinity mood.
+		// the interval between two step
+		// useful for infinity mood.
 		stepsInterval time.Duration
-
-		// reverse reverse the process to maximize the cost.
-		reverse bool
 
 		// selection is the property for distribution to the next generation.
 		//
@@ -42,5 +43,15 @@ type ga struct {
 			mutation float64
 			random   float64
 		}
+
+		// numberOfThreads the number of thread in Cost calculation step.
+		numberOfThreads int
 	}
+
+	curetGeneration modelSortedList
+	step            int64
+
+	result        chan Model
+	runtimeError  chan error
+	runtimeResult chan RunTimeResult
 }
