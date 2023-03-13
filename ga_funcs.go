@@ -87,7 +87,7 @@ func (s *ga) Start() error {
 			if s.curetGeneration[0].cost <= s.config.targetCost {
 				break
 			}
-			if s.config.maxNumOfSteps != 0 && s.step > s.config.maxNumOfSteps {
+			if s.config.maxNumOfSteps != 0 && s.step >= s.config.maxNumOfSteps {
 				break
 			}
 			time.Sleep(s.config.stepsInterval)
