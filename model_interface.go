@@ -1,5 +1,6 @@
 package goga
 
+//Model is an interface which is about to being optimized.
 type Model interface {
 	// the cost function of the model to be Optimized.
 	Cost() float64
