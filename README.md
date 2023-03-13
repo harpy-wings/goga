@@ -9,6 +9,101 @@
 
 Genetic Algorithm implementation in go.
 
+## Installation
+
+```bash
+go get -u github.com/harpy-wings/goga
+```
+
+## Usage
+
+You need to define a type that implements the `goga.Model` interface based on your requirement. It can be a simple string matcher or a CNN neural network. Also, you need to pass a generator function to the *GA* algorithm, The *GA* uses the generator function to produce the new random genes or model.
+
+```go
+ // GeneratorFunc generates random Models.
+ type GeneratorFunc  func() Model
+
+ //Model is an interface which is about to being optimized.
+ type Model interface {
+    // the cost function of the model to be Optimized.
+    Cost() float64
+    // Mutation is concatenation of the model with another model.
+    //
+    // Note: A.Mutate(B) != B.Mutate(A)
+    Mutation(Model) Model
+}
+```
+
+> You can check the [`_example`](https://github.com/harpy-wings/goga/tree/main/_example/) for more detailed examples.
+
+## Parameters
+
+- ### Generator Function
+
+  - Required
+  - `OptionWithGeneratorFunc(fn func() Model)`
+
+  - The Generator function is used by *GA* to generate Random model.
+
+- ### Weight Function
+
+  - Optional
+  - Default: equal weight
+  - `OptionWithWeightFunc(fn WeightFunc)`
+    - `type WeightFunc func(rank int, cost float64) int`
+  - The Weight Function can be use to select the next generation biased on their weights. you can make the design based it the values which are given you as arguments and return a weight as int.
+    - > note you can use Decorator Pattern to access some other values from your code.
+
+- ### Population Function
+
+  - Optional
+  - Default: the initial population as a constant Population.
+  - `OptionWithPopulationFunc(fn PopulationFunc)`
+    - `PopulationFunc func(currentPopulation int, step int64, bestCost, worstCost float64) int`
+  - The Population function can be use to manage the population in the process, based on the current population, step, bestCost and worst cost.
+
+- ### Initial Population
+
+  - Optional
+  - Default: 1000
+  - `OptionWithInitialPopulation(n int)`
+  - The initial Population of *GA*.
+
+- ### Maximum Number of Steps
+
+  - Optional
+  - Default: 1000
+  - `OptionWithMaximumNumberOfSteps(n int64)`
+  - The maximum number of steps if *GA* could not reach the `targetCost`.
+
+- ### Target Cost
+
+  - Required
+  - Default: 0.05
+  - `OptionWithTargetCost(v float64)`
+  - The target cost specifies the point at which the process will stop once it reaches that cost.
+
+- ### Steps Interval
+
+  - Optional
+  - Default: 0
+  - `OptionWithStepInterval(d time.Duration)`
+  - In Always run mode, once the *GA* reach the CostTarget, it will sleep that much time between two steps. It is useful in situation which you want to continuously improve the model.
+
+- ### Selection Configuration
+
+  - Optional
+  - Default: Top: 20%, Mutation: 40%, Random: 40%
+  - `OptionWithSelection(top, mutation, random float64) Option`
+  - The subset of the population is selected for the next generation.
+
+- ### Number of Threads
+
+  - Optional
+  - Default: 12
+  - `OptionWithNumberOfThreads(n int)`
+  - Specify the number of thread in Cost calculation step.
+
 ## Benchmark
 
 ### Binary String Match

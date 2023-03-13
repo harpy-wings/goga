@@ -102,3 +102,13 @@ func TestOptionWithInitialPopulation(t *testing.T) {
 		require.Equal(t, initialPopulation, g.config.initialPopulation)
 	})
 }
+
+func TestOptionWithNumberOfThreads(t *testing.T) {
+	t.Run("success", func(t *testing.T) {
+		numberOfThreads := int(20)
+		g := &ga{}
+		err := OptionWithNumberOfThreads(numberOfThreads)(g)
+		require.NoError(t, err)
+		require.Equal(t, numberOfThreads, g.config.numberOfThreads)
+	})
+}

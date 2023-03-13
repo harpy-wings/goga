@@ -145,3 +145,16 @@ func OptionWithInitialPopulation(n int) Option {
 		return nil
 	}
 }
+
+// OptionWithNumberOfThreads specify the number of thread in Cost calculation step.
+//
+// default: 12
+// ex:
+//
+// OptionWithNumberOfThreads(24)
+func OptionWithNumberOfThreads(n int) Option {
+	return func(g *ga) error {
+		g.config.numberOfThreads = n
+		return nil
+	}
+}
