@@ -5,7 +5,7 @@ import "time"
 var (
 	defaultSelectionTop      = 0.2
 	defaultSelectionMutation = 0.6
-	defaultNumberOfThreads   = 24
+	defaultNumberOfThreads   = 12
 
 	defaultMaxNumOfSteps = int64(1000)
 
