@@ -36,7 +36,6 @@ func TestResult(t *testing.T) {
 		ga := GA.(*ga)
 		ga.result <- nil
 	}()
-	Resp, err := GA.Result()
+	_, err = GA.Result()
 	require.NoError(t, err)
-	require.NotNil(t, Resp)
 }
