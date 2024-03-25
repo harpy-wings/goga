@@ -144,7 +144,7 @@ ok      github.com/harpy-wings/goga/test/bench  2.046s
     - top: 0.125
     - mutation: 0.25
     - random: 0.625
-- maximum number of step: 100
+- maximum number of steps: 100
 - population: constant 600
 - target cost: 0 (all cases match)
 
